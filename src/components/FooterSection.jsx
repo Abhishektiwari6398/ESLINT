@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto text-center relative">
         <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 6 }} className="flex items-center justify-center space-x-3 mb-4 sm:mb-6">
           <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 text-purple-500" />
-          <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">crazefames</span>
+          <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent"> crazyfames</span>
         </motion.div>
 
         <motion.p className="text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }}>
@@ -25,7 +25,7 @@ const Footer = () => {
           ))}
         </div>
 
-        <motion.p className="text-gray-500 text-xs sm:text-sm">© 2025 crazefames. All rights reserved.</motion.p>
+        <motion.p className="text-gray-500 text-xs sm:text-sm">© 2025  crazyfames. All rights reserved.</motion.p>
 
   
         <motion.div aria-hidden className="absolute left-0 right-0 bottom-1 h-0.5 mx-auto max-w-lg rounded-full opacity-30"

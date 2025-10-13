@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+
+import { TfiEmail } from "react-icons/tfi";
+import { FaFacebook } from "react-icons/fa6";
+import { RiTwitterXFill } from "react-icons/ri";
+import { RiMapPinUserFill } from "react-icons/ri";
+import { FaInstagramSquare } from "react-icons/fa";
+import { FaSquarePhone } from "react-icons/fa6";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -58,13 +64,13 @@ const ContactSection = () => {
             <motion.div variants={item} className="space-y-6">
               {[
                 {
-                  Icon: MapPin,
+                  Icon:  RiMapPinUserFill,
                   title: 'Office Locations',
                   text: 'Dubai, UAE • Riyadh, Saudi Arabia • Mumbai, India',
                   bg: 'from-purple-600 to-pink-600',
                 },
-                { Icon: Phone, title: 'Phone', text: '+971 XX XXX XXXX', bg: 'from-pink-600 to-red-600' },
-                { Icon: Mail, title: 'Email', text: 'contact@elitemgmt.com', bg: 'from-blue-600 to-purple-600' },
+                { Icon: FaSquarePhone , title: 'Phone', text: '+971 XX XXX XXXX', bg: 'from-pink-600 to-red-600' },
+                { Icon: TfiEmail , title: 'Email', text: 'contact@elitemgmt.com', bg: 'from-blue-600 to-purple-600' },
               ].map((s, idx) => (
                 <motion.div key={idx} variants={item} whileHover={{ translateX: 6 }} className="flex items-start space-x-4 group">
                   <motion.div layout whileHover={{ scale: 1.08 }} className={`p-3 bg-gradient-to-r ${s.bg} rounded-xl`}>
@@ -82,7 +88,7 @@ const ContactSection = () => {
             <motion.div variants={item} className="pt-8">
               <h4 className="text-white font-semibold mb-4">Follow Us</h4>
               <div className="flex flex-wrap gap-4">
-                {[Instagram, Facebook, Twitter].map((Icon, idx) => (
+                {[FaInstagramSquare , FaFacebook , RiTwitterXFill].map((Icon, idx) => (
                   <motion.button
                     key={idx}
                     whileTap={{ scale: 0.92 }}

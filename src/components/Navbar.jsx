@@ -33,7 +33,7 @@ const Navbar = () => {
               <div className="absolute inset-0 bg-purple-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-             crazefames
+              crazyfames
             </span>
           </Link>
 
