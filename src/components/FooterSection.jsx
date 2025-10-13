@@ -44,7 +44,7 @@ return (
 <div className="max-w-7xl mx-auto text-center relative">
 <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 6 }} className="flex items-center justify-center space-x-3 mb-6">
 <Sparkles className="w-8 h-8 text-purple-500" />
-<span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">ELITE MGMT</span>
+<span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">crazefames</span>
 </motion.div>
 
 
@@ -62,7 +62,7 @@ Redefining excellence in model management and event production across the Middle
 </div>
 
 
-<motion.p className="text-gray-500 text-sm">© 2025 Elite Management. All rights reserved.</motion.p>
+<motion.p className="text-gray-500 text-sm">© 2025 crazefames. All rights reserved.</motion.p>
 
 
 {/* small shimmer line */}
