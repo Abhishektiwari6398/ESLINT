@@ -28,27 +28,26 @@ const ContactSection = () => {
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
       variants={container}
-      className="relative overflow-hidden min-h-screen bg-black py-20 px-4"
+      className="relative overflow-hidden bg-black py-12 sm:py-20 px-4"
     >
-     
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -right-36 -top-24 w-72 h-72 rounded-full blur-3xl opacity-20"
+        className="pointer-events-none absolute -right-36 -top-24 w-56 h-56 sm:w-72 sm:h-72 rounded-full blur-3xl opacity-20"
         style={{ background: 'radial-gradient(circle at 30% 30%, rgba(167,139,250,0.18), transparent 40%)' }}
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: 60, ease: 'linear' }}
       />
 
       <motion.div className="max-w-7xl mx-auto" variants={{ show: { transition: { staggerChildren: 0.06 } } }}>
-        <motion.div variants={item} className="text-center mb-16 space-y-4">
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <motion.div variants={item} className="text-center mb-12 sm:mb-16 space-y-4">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             Get In Touch
           </h2>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">Let's create something extraordinary together</p>
+          <p className="text-gray-400 text-sm sm:text-lg max-w-3xl mx-auto">Let's create something extraordinary together</p>
         </motion.div>
 
-        <motion.div variants={item} className="grid md:grid-cols-2 gap-12">
-          <motion.div variants={item} className="space-y-8">
+        <motion.div variants={item} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div variants={item} className="space-y-6">
             <motion.div variants={item} className="space-y-6">
               {[{
                 Icon: MapPin,
@@ -75,21 +74,21 @@ const ContactSection = () => {
                   <motion.div
                     layout
                     whileHover={{ scale: 1.08 }}
-                    className={`p-3 bg-gradient-to-r ${s.bg} rounded-xl`}
+                    className={`p-3 sm:p-4 bg-gradient-to-r ${s.bg} rounded-xl`}
                   >
-                    <s.Icon className="w-6 h-6 text-white" />
+                    <s.Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </motion.div>
                   <div>
                     <h4 className="text-white font-semibold mb-1">{s.title}</h4>
-                    <p className="text-gray-400">{s.text}</p>
+                    <p className="text-gray-400 text-sm sm:text-base">{s.text}</p>
                   </div>
                 </motion.div>
               ))}
             </motion.div>
 
-            <motion.div variants={item} className="pt-8">
+            <motion.div variants={item} className="pt-6 sm:pt-8">
               <h4 className="text-white font-semibold mb-4">Follow Us</h4>
-              <div className="flex space-x-4">
+              <div className="flex space-x-3">
                 {[Instagram, Facebook, Twitter].map((Icon, idx) => (
                   <motion.button
                     key={idx}
@@ -98,7 +97,7 @@ const ContactSection = () => {
                     className="p-3 bg-white/5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 rounded-xl transition-all"
                     aria-label={`Open ${Icon.name}`}
                   >
-                    <Icon className="w-6 h-6 text-gray-400 hover:text-white transition-colors" />
+                    <Icon className="w-5 h-5 text-gray-400 hover:text-white transition-colors" />
                   </motion.button>
                 ))}
               </div>
@@ -107,7 +106,7 @@ const ContactSection = () => {
 
           <motion.form
             variants={item}
-            className="space-y-6"
+            className="space-y-4"
             onSubmit={handleSubmit}
             aria-label="Contact form"
           >
@@ -121,7 +120,7 @@ const ContactSection = () => {
                   type={f.type}
                   value={formData[f.key]}
                   onChange={(e) => setFormData({ ...formData, [f.key]: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 sm:px-6 py-3 sm:py-4 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors"
                   placeholder={f.placeholder}
                   whileFocus={{ scale: 1.01 }}
                 />
@@ -133,7 +132,7 @@ const ContactSection = () => {
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 rows={5}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors resize-none"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 sm:px-6 py-3 sm:py-4 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors resize-none"
                 placeholder="Your Message"
                 whileFocus={{ scale: 1.01 }}
               />
@@ -145,7 +144,7 @@ const ContactSection = () => {
               whileHover={{ scale: 1.03, boxShadow: '0 10px 30px rgba(139,92,246,0.18)' }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 280, damping: 20 }}
-              className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-semibold text-white hover:shadow-2xl hover:shadow-purple-500/50 transition-all"
+              className="w-full py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-semibold text-white hover:shadow-2xl hover:shadow-purple-500/50 transition-all"
             >
               Send Message
             </motion.button>
