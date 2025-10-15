@@ -69,8 +69,8 @@ const ContactSection = () => {
                   text: 'Dubai, UAE • Riyadh, Saudi Arabia • Mumbai, India',
                   bg: 'from-purple-600 to-pink-600',
                 },
-                { Icon: FaSquarePhone , title: 'Phone', text: '+971 XX XXX XXXX', bg: 'from-pink-600 to-red-600' },
-                { Icon: TfiEmail , title: 'Email', text: 'contact@elitemgmt.com', bg: 'from-blue-600 to-purple-600' },
+                { Icon: FaSquarePhone , title: 'Phone', text: '+91 8595519533 ', bg: 'from-pink-600 to-red-600' },
+                { Icon: TfiEmail , title: 'Email', text: 'contact@crazyfames.com', bg: 'from-blue-600 to-purple-600' },
               ].map((s, idx) => (
                 <motion.div key={idx} variants={item} whileHover={{ translateX: 6 }} className="flex items-start space-x-4 group">
                   <motion.div layout whileHover={{ scale: 1.08 }} className={`p-3 bg-gradient-to-r ${s.bg} rounded-xl`}>
