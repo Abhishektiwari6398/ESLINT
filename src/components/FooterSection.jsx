@@ -1,6 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, Facebook, Twitter, Sparkles } from 'lucide-react';
+import {  Sparkles } from 'lucide-react';
+import { FaFacebook } from "react-icons/fa6";
+import { RiTwitterXFill } from "react-icons/ri";
+import { FaInstagramSquare } from "react-icons/fa";
+
 
 const Footer = () => {
   const footer = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
@@ -8,7 +12,7 @@ const Footer = () => {
   return (
     <motion.footer initial="hidden" whileInView="show" variants={footer} viewport={{ once: true, amount: 0.2 }} className="bg-gradient-to-b from-black to-purple-950/20 border-t border-white/10 py-8 sm:py-12 px-4">
       <div className="max-w-7xl mx-auto text-center relative">
-        <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 6 }} className="flex items-center justify-center space-x-3 mb-4 sm:mb-6">
+        <motion.div  className="flex items-center justify-center space-x-3 mb-4 sm:mb-6">
           <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 text-purple-500" />
           <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent"> crazyfames</span>
         </motion.div>
@@ -18,7 +22,7 @@ const Footer = () => {
         </motion.p>
 
         <div className="flex justify-center space-x-4 mb-6">
-          {[Instagram, Facebook, Twitter].map((Icon, idx) => (
+          {[FaInstagramSquare , FaFacebook,  RiTwitterXFill].map((Icon, idx) => (
             <motion.button key={idx} whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.96 }} className="p-2 bg-white/5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 rounded-lg transition-all">
               <Icon className="w-5 h-5 text-gray-400 hover:text-white transition-colors" />
             </motion.button>

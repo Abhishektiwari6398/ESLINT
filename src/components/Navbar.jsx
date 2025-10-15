@@ -29,7 +29,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-3 group cursor-pointer relative z-50">
             <div className="relative">
-              <Sparkles className="w-8 h-8 text-purple-500 animate-pulse" />
+              <Sparkles className="w-8 h-8 text-purple-500 " />
               <div className="absolute inset-0 bg-purple-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">

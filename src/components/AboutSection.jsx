@@ -66,7 +66,7 @@ const AboutSection = () => {
           }`}
         >
           <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-all duration-500 animate-pulse"></div>
+            <div className="absolute -inset-1  rounded-2xl blur-xl opacity-50 group-hover:opacity-10 transition-all duration-500 animate-pulse"></div>
             <img
               src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=800"
               alt="Luxury Event"
@@ -117,7 +117,7 @@ const AboutSection = () => {
           {stats.map((stat, idx) => (
             <div
               key={idx}
-              className="group relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-white/10 rounded-2xl p-5 sm:p-6 text-center hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/20"
+              className="group relative bg-gradient-to-br from-purple-900/30 to-pink-900/30  border border-white/10 rounded-2xl p-5 sm:p-6 text-center hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-2  hover:shadow-purple-500/20"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-pink-600/0 group-hover:from-purple-600/10 group-hover:to-pink-600/10 rounded-2xl transition-all duration-500"></div>

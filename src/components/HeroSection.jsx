@@ -18,7 +18,7 @@ const HeroSection = () => {
     setIsVisible(true);
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 2000);
+    }, 3500);
     return () => clearInterval(timer);
   }, []);
 
@@ -32,7 +32,7 @@ const HeroSection = () => {
           }`}
         >
           <img src={slide} alt={`Slide ${idx + 1}`} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-purple-900/50 to-black/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-purple-900/30 "></div>
         </div>
       ))}
 

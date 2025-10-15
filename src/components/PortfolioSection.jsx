@@ -62,7 +62,7 @@ const PortfolioSection = () => {
               onClick={() => setActiveTab(tab)}
               className={`px-8 py-3 rounded-full font-semibold capitalize transition-all duration-500 ${
                 activeTab === tab
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/50 scale-110'
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white  shadow-purple-500/50 scale-110'
                   : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:scale-105'
               }`}
             >
@@ -75,7 +75,7 @@ const PortfolioSection = () => {
           {portfolioImages[activeTab].map((img, idx) => (
             <div
               key={idx}
-              className={`group relative aspect-square overflow-hidden rounded-2xl cursor-pointer transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/30 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+              className={`group relative aspect-square overflow-hidden rounded-2xl cursor-pointer transition-all duration-700 hover:-translate-y-2  hover:shadow-purple-500/30 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${idx * 100}ms` }}
             >
               <img

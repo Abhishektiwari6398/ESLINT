@@ -144,7 +144,7 @@ const ContactSection = () => {
               whileHover={{ scale: 1.03, boxShadow: '0 10px 30px rgba(139,92,246,0.18)' }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 280, damping: 20 }}
-              className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-semibold text-white hover:shadow-2xl hover:shadow-purple-500/50 transition-all"
+              className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-semibold text-white   transition-all"
             >
               Send Message
             </motion.button>
