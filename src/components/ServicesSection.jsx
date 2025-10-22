@@ -48,7 +48,7 @@ const ServicesSection = () => {
   return (
     <div
       id="services-section"
-      className="min-h-screen bg-gray-50 py-20 sm:py-32 px-4"
+      className="min-h-screen bg-white py-20 sm:py-32 px-4"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -58,7 +58,7 @@ const ServicesSection = () => {
           }`}
         >
           <p className="text-xs tracking-[0.3em] text-gray-500 font-light">SERVICES</p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl text-black leading-tight font-serif">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl text-slate-900 leading-tight font-serif">
             What We Offer
           </h2>
           <div className="flex items-center justify-center space-x-4">
@@ -66,7 +66,7 @@ const ServicesSection = () => {
             <div className="w-2 h-2 bg-amber-500 transform rotate-45"></div>
             <div className="w-16 h-px bg-amber-500"></div>
           </div>
-          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="text-gray-700 text-base sm:text-lg max-w-2xl mx-auto">
             Comprehensive solutions for brands, models, and event organizers
           </p>
         </div>
@@ -94,28 +94,28 @@ const ServicesSection = () => {
                     hoveredIndex === idx ? 'scale-110 grayscale-0' : 'scale-100 grayscale-[30%]'
                   }`}
                 />
-                <div className={`absolute inset-0 bg-black transition-opacity duration-500 ${
+                <div className={`absolute inset-0 bg-slate-900 transition-opacity duration-500 ${
                   hoveredIndex === idx ? 'opacity-20' : 'opacity-0'
                 }`}></div>
                 
                 {/* Icon overlay */}
                 <div className="absolute top-6 right-6">
                   <div className="w-12 h-12 bg-white/90 flex items-center justify-center">
-                    <service.icon className="w-6 h-6 text-black" />
+                    <service.icon className="w-6 h-6 text-slate-900" />
                   </div>
                 </div>
               </div>
 
               {/* Content */}
               <div className="p-8 space-y-4">
-                <h3 className="text-2xl sm:text-3xl text-black font-serif">
+                <h3 className="text-2xl sm:text-3xl text-slate-900 font-serif">
                   {service.title}
                 </h3>
                 <div className="w-12 h-px bg-amber-500"></div>
-                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
                   {service.description}
                 </p>
-                <button className="flex items-center space-x-2 text-sm tracking-wider text-black hover:text-amber-600 transition-colors pt-2 group">
+                <button className="flex items-center space-x-2 text-sm tracking-wider text-slate-900 hover:text-amber-600 transition-colors pt-2 group">
                   <span>LEARN MORE</span>
                   <BsArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -130,8 +130,8 @@ const ServicesSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <p className="text-gray-600 mb-6">Ready to elevate your brand?</p>
-          <button className="px-10 py-4 bg-black text-white text-sm tracking-[0.15em] hover:bg-gray-800 transition-colors">
+          <p className="text-gray-700 mb-6">Ready to elevate your brand?</p>
+          <button className="px-10 py-4 bg-slate-900 text-white text-sm tracking-[0.15em] hover:bg-slate-800 transition-colors">
             GET STARTED
           </button>
         </div>

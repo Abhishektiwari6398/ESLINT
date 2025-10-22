@@ -22,7 +22,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="relative h-screen overflow-hidden bg-black">
+    <div className="relative h-screen overflow-hidden bg-slate-900">
       {/* Background Images - Smooth Fade Only */}
       {slides.map((slide, idx) => (
         <div
@@ -32,8 +32,8 @@ const HeroSection = () => {
           }`}
         >
           <img src={slide} alt="" className="w-full h-full object-cover" />
-          {/* Subtle overlay - not too dark */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50"></div>
+          {/* Natural overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-transparent to-slate-900/60"></div>
         </div>
       ))}
 

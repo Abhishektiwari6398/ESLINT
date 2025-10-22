@@ -27,7 +27,7 @@ const Navbar = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
       scrolled 
         ? 'bg-white shadow-md py-4' 
-        : 'bg-white/95 backdrop-blur-sm py-6'
+        : 'bg-white/98 backdrop-blur-sm py-6'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -35,7 +35,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="relative">
               <Sparkles className="w-8 h-8 text-black" />
-              <div className="absolute inset-0   group-hover:opacity-75 transition-opacity"></div>
+              <div className="absolute inset-0 group-hover:opacity-75 transition-opacity"></div>
             </div>
             <span className="text-2xl font-serif text-black tracking-tight">CrazyFames</span>
           </Link>

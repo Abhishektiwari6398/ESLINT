@@ -1,14 +1,11 @@
 import React from 'react';
-// import { motion } from 'framer-motion';
-import {  Sparkles,Linkedin } from 'lucide-react';
+import { Sparkles, Linkedin } from 'lucide-react';
 import { FaFacebook } from "react-icons/fa6";
-// import { RiTwitterXFill } from "react-icons/ri";
 import { FaInstagramSquare } from "react-icons/fa";
-
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-16 px-4">
+    <footer className="bg-slate-900 text-white py-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 pb-12 border-b border-white/10">
@@ -56,7 +53,7 @@ const Footer = () => {
           
           {/* Social Icons */}
           <div className="flex space-x-4">
-            {[FaInstagramSquare, FaFacebook,Linkedin ].map((Icon, idx) => (
+            {[FaInstagramSquare, FaFacebook, Linkedin].map((Icon, idx) => (
               <button
                 key={idx}
                 className="w-10 h-10 border border-gray-700 flex items-center justify-center hover:border-amber-500 group transition-colors"

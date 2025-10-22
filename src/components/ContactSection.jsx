@@ -25,7 +25,7 @@ const ContactSection = () => {
   return (
     <div
       id="contact-section"
-      className="min-h-screen bg-gray-50 py-20 sm:py-32 px-4"
+      className="min-h-screen bg-white py-20 sm:py-32 px-4"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -33,7 +33,7 @@ const ContactSection = () => {
           <p className="text-xs tracking-[0.3em] text-gray-500 font-light">
             CONTACT
           </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl text-black leading-tight font-serif">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl text-slate-900 leading-tight font-serif">
             Get In Touch
           </h2>
           <div className="flex items-center justify-center space-x-4">
@@ -41,7 +41,7 @@ const ContactSection = () => {
             <div className="w-2 h-2 bg-amber-500 transform rotate-45"></div>
             <div className="w-16 h-px bg-amber-500"></div>
           </div>
-          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="text-gray-700 text-base sm:text-lg max-w-2xl mx-auto">
             Let's create something extraordinary together
           </p>
         </div>
@@ -51,49 +51,48 @@ const ContactSection = () => {
           {/* Left: Contact Info */}
           <div className="space-y-12">
             <div>
-              <h3 className="text-2xl sm:text-3xl text-black mb-8 font-serif">
+              <h3 className="text-2xl sm:text-3xl text-slate-900 mb-8 font-serif">
                 Contact Information
               </h3>
               <div className="space-y-8">
                 {/* Location */}
                 <div className="flex items-start space-x-5">
-                  <div className="w-12 h-12 bg-black flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-slate-900 flex items-center justify-center flex-shrink-0">
                     <FaMapMarkerAlt className="w-5 h-5 text-amber-500" />
                   </div>
                   <div>
-                    <h4 className="text-black font-medium  tracking-wide">
+                    <h4 className="text-slate-900 font-medium tracking-wide">
                       Office Locations
                     </h4>
-
-                    <p className="text-gray-600 text-sm">
-                      Dubai, UAE Riyadh, Saudi Arabia, Mumbai{" "}
+                    <p className="text-gray-700 text-sm">
+                      Dubai, UAE • Riyadh, Saudi Arabia • Mumbai
                     </p>
                   </div>
                 </div>
 
                 {/* Phone */}
                 <div className="flex items-start space-x-5">
-                  <div className="w-12 h-12 bg-black flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-slate-900 flex items-center justify-center flex-shrink-0">
                     <FaPhone className="w-5 h-5 text-amber-500" />
                   </div>
                   <div>
-                    <h4 className="text-black font-medium  tracking-wide">
+                    <h4 className="text-slate-900 font-medium tracking-wide">
                       Phone
                     </h4>
-                    <p className="text-gray-600 text-sm">+91 8595519533</p>
+                    <p className="text-gray-700 text-sm">+91 8595519533</p>
                   </div>
                 </div>
 
                 {/* Email */}
                 <div className="flex items-start space-x-5">
-                  <div className="w-12 h-12 bg-black flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-slate-900 flex items-center justify-center flex-shrink-0">
                     <FaEnvelope className="w-5 h-5 text-amber-500" />
                   </div>
                   <div>
-                    <h4 className="text-black font-medium  tracking-wide">
+                    <h4 className="text-slate-900 font-medium tracking-wide">
                       Email
                     </h4>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-700 text-sm">
                       contact@crazyfames.com
                     </p>
                   </div>
@@ -103,7 +102,7 @@ const ContactSection = () => {
 
             {/* Social Links */}
             <div>
-              <h4 className="text-black font-medium mb-4 tracking-wide">
+              <h4 className="text-slate-900 font-medium mb-4 tracking-wide">
                 Follow Us
               </h4>
               <div className="flex space-x-4">
@@ -114,7 +113,7 @@ const ContactSection = () => {
                 ].map(({ Icon, label }, idx) => (
                   <button
                     key={idx}
-                    className="w-12 h-12 border-2 border-gray-300 flex items-center justify-center hover:bg-black hover:border-black group transition-colors duration-300"
+                    className="w-12 h-12 border-2 border-gray-300 flex items-center justify-center hover:bg-slate-900 hover:border-slate-900 group transition-colors duration-300"
                     aria-label={label}
                   >
                     <Icon className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
@@ -125,7 +124,7 @@ const ContactSection = () => {
           </div>
 
           {/* Right: Contact Form */}
-          <div className="bg-white p-8 sm:p-12">
+          <div className="bg-neutral-50 p-8 sm:p-12">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <input
@@ -134,7 +133,7 @@ const ContactSection = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full border-b border-gray-300 py-4 text-black placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
+                  className="w-full border-b border-gray-300 py-4 text-slate-900 placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
                   placeholder="Your Name"
                   required
                 />
@@ -147,7 +146,7 @@ const ContactSection = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full border-b border-gray-300 py-4 text-black placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
+                  className="w-full border-b border-gray-300 py-4 text-slate-900 placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
                   placeholder="Your Email"
                   required
                 />
@@ -160,7 +159,7 @@ const ContactSection = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
-                  className="w-full border-b border-gray-300 py-4 text-black placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
+                  className="w-full border-b border-gray-300 py-4 text-slate-900 placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
                   placeholder="Your Phone"
                   required
                 />
@@ -173,7 +172,7 @@ const ContactSection = () => {
                     setFormData({ ...formData, message: e.target.value })
                   }
                   rows={5}
-                  className="w-full border-b border-gray-300 py-4 text-black placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors resize-none bg-transparent"
+                  className="w-full border-b border-gray-300 py-4 text-slate-900 placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors resize-none bg-transparent"
                   placeholder="Your Message"
                   required
                 />
@@ -181,7 +180,7 @@ const ContactSection = () => {
 
               <button
                 type="submit"
-                className="w-full py-4 bg-black text-white text-sm tracking-[0.15em] hover:bg-gray-800 transition-colors mt-4"
+                className="w-full py-4 bg-slate-900 text-white text-sm tracking-[0.15em] hover:bg-slate-800 transition-colors mt-4"
               >
                 SEND MESSAGE
               </button>

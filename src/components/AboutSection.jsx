@@ -56,7 +56,7 @@ const AboutSection = () => {
   return (
     <div
       id="about-section"
-      className="min-h-screen bg-white py-20 sm:py-32 px-4"
+      className="min-h-screen bg-neutral-50 py-20 sm:py-32 px-4"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -66,7 +66,7 @@ const AboutSection = () => {
           }`}
         >
           <p className="text-xs tracking-[0.3em] text-gray-500 font-light">ABOUT US</p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl text-black leading-tight font-serif">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl text-slate-900 leading-tight font-serif">
             A Legacy of Excellence
           </h2>
           <div className="flex items-center justify-center space-x-4">
@@ -99,14 +99,14 @@ const AboutSection = () => {
 
           {/* Text Content */}
           <div className="space-y-6">
-            <h3 className="text-3xl sm:text-4xl text-black leading-tight font-serif">
+            <h3 className="text-3xl sm:text-4xl text-slate-900 leading-tight font-serif">
               Globally Recognized Excellence
             </h3>
             <div className="w-20 h-px bg-amber-500"></div>
-            <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
+            <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
               With over 15 years of experience in the industry, we've established ourselves as the premier choice for luxury events and model management across Dubai, Saudi Arabia, and beyond.
             </p>
-            <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
+            <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
               Our portfolio includes high-profile events, fashion shows, celebrity appearances, and corporate galas. We represent some of the most sought-after talent in the industry and have produced unforgettable experiences for global brands.
             </p>
             
@@ -115,7 +115,7 @@ const AboutSection = () => {
               {['Fashion Events', 'Celebrity Management', 'Corporate Galas'].map((tag, idx) => (
                 <span
                   key={idx}
-                  className="px-5 py-2 border border-gray-300 text-gray-700 text-xs tracking-wider hover:border-black hover:text-black transition-all duration-300 cursor-default"
+                  className="px-5 py-2 border border-gray-300 text-gray-700 text-xs tracking-wider hover:border-slate-900 hover:text-slate-900 transition-all duration-300 cursor-default"
                 >
                   {tag}
                 </span>
@@ -137,7 +137,7 @@ const AboutSection = () => {
               style={{ transitionDelay: `${idx * 100}ms` }}
             >
               <stat.icon className="w-10 h-10 sm:w-12 sm:h-12 text-amber-500 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-              <div className="text-3xl sm:text-5xl font-light text-black mb-2 font-serif">
+              <div className="text-3xl sm:text-5xl font-light text-slate-900 mb-2 font-serif">
                 {stat.value}{stat.suffix}
               </div>
               <div className="text-gray-600 text-xs sm:text-sm tracking-wider uppercase">
