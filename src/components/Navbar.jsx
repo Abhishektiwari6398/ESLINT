@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, Sparkles, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,60 +24,81 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-black/95 backdrop-blur-lg py-4 shadow-2xl' : 'bg-black/50 backdrop-blur-sm py-6'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${
+      scrolled 
+        ? 'bg-white shadow-md py-4' 
+        : 'bg-white/95 backdrop-blur-sm py-6'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-3 group cursor-pointer relative z-50">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2 group">
             <div className="relative">
-              <Sparkles className="w-8 h-8 text-purple-500 " />
-              <div className="absolute inset-0 bg-purple-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+              <Sparkles className="w-8 h-8 text-black" />
+              <div className="absolute inset-0   group-hover:opacity-75 transition-opacity"></div>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-              crazyfames
-            </span>
+            <span className="text-2xl font-serif text-black tracking-tight">CrazyFames</span>
           </Link>
 
-          <div className="hidden md:flex space-x-8">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`relative text-sm font-medium transition-all duration-300 group ${
-                  location.pathname === item.path ? 'text-purple-400' : 'text-gray-300 hover:text-white'
+                className={`relative text-sm tracking-wider transition-all duration-300 ${
+                  location.pathname === item.path 
+                    ? 'text-black font-medium' 
+                    : 'text-gray-600 hover:text-black'
                 }`}
               >
-                {item.name}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 ${
-                  location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}></span>
+                {item.name.toUpperCase()}
+                {location.pathname === item.path && (
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-amber-500"></span>
+                )}
               </Link>
             ))}
+            <Link 
+              to="/contact" 
+              className="px-6 py-2 bg-black text-white text-sm tracking-wider hover:bg-gray-800 transition-colors"
+            >
+              BOOK NOW
+            </Link>
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white hover:text-purple-400 transition-colors relative z-50"
+            className="md:hidden text-black hover:text-gray-600 transition-colors"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
+        {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden mt-4 pb-4 space-y-3 bg-black/95 backdrop-blur-xl rounded-2xl p-4 border border-white/10 animate-in fade-in slide-in-from-top duration-300">
+          <div className="md:hidden mt-6 pb-4 space-y-4 border-t border-gray-200 pt-4">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsOpen(false)}
-                className={`block w-full text-left px-4 py-2 rounded-lg transition-all ${
-                  location.pathname === item.path
-                    ? 'bg-purple-500/20 text-purple-400'
-                    : 'text-gray-300 hover:bg-white/5'
+                className={`block w-full text-left py-2 text-sm tracking-wider transition-colors ${
+                  location.pathname === item.path 
+                    ? 'text-black font-medium' 
+                    : 'text-gray-600'
                 }`}
               >
-                {item.name}
+                {item.name.toUpperCase()}
               </Link>
             ))}
+            <Link 
+              to="/contact"
+              onClick={() => setIsOpen(false)}
+              className="block w-full px-6 py-3 bg-black text-white text-sm tracking-wider hover:bg-gray-800 transition-colors mt-4 text-center"
+            >
+              BOOK NOW
+            </Link>
           </div>
         )}
       </div>

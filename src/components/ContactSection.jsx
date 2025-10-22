@@ -1,157 +1,195 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-
-import { TfiEmail } from "react-icons/tfi";
-import { FaFacebook } from "react-icons/fa6";
-import { RiTwitterXFill } from "react-icons/ri";
-import { RiMapPinUserFill } from "react-icons/ri";
-import { FaInstagramSquare } from "react-icons/fa";
-import { FaSquarePhone } from "react-icons/fa6";
+import React, { useState } from "react";
+import {
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaInstagram,
+  FaFacebookF,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Thank you for your inquiry! We will contact you soon.');
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    alert("Thank you for your inquiry! We will contact you soon.");
+    setFormData({ name: "", email: "", phone: "", message: "" });
   };
-
-  const container = {
-    hidden: { opacity: 0, y: 18 },
-    show: { opacity: 1, y: 0, transition: { staggerChildren: 0.08, when: 'beforeChildren' } },
-  };
-  const item = { hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0, transition: { ease: 'easeOut', duration: 0.45 } } };
 
   return (
-    <motion.section
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={container}
-      className="relative overflow-hidden bg-black py-20 px-4"
+    <div
+      id="contact-section"
+      className="min-h-screen bg-gray-50 py-20 sm:py-32 px-4"
     >
-      {/* Background shimmer */}
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -right-36 -top-24 w-72 h-72 rounded-full blur-3xl opacity-20"
-        style={{ background: 'radial-gradient(circle at 30% 30%, rgba(167,139,250,0.18), transparent 40%)' }}
-        animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, duration: 60, ease: 'linear' }}
-      />
-
-      <motion.div className="max-w-7xl mx-auto" variants={{ show: { transition: { staggerChildren: 0.06 } } }}>
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div variants={item} className="text-center mb-12 sm:mb-16 space-y-4">
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <div className="text-center mb-16 sm:mb-24 space-y-6">
+          <p className="text-xs tracking-[0.3em] text-gray-500 font-light">
+            CONTACT
+          </p>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl text-black leading-tight font-serif">
             Get In Touch
           </h2>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+          <div className="flex items-center justify-center space-x-4">
+            <div className="w-16 h-px bg-amber-500"></div>
+            <div className="w-2 h-2 bg-amber-500 transform rotate-45"></div>
+            <div className="w-16 h-px bg-amber-500"></div>
+          </div>
+          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
             Let's create something extraordinary together
           </p>
-        </motion.div>
+        </div>
 
-        {/* Main Content */}
-        <motion.div variants={item} className="flex flex-col lg:flex-row gap-12 lg:gap-20">
-          {/* Left: Info */}
-          <motion.div variants={item} className="flex-1 space-y-8">
-            {/* Contact info */}
-            <motion.div variants={item} className="space-y-6">
-              {[
-                {
-                  Icon:  RiMapPinUserFill,
-                  title: 'Office Locations',
-                  text: 'Dubai, UAE • Riyadh, Saudi Arabia • Mumbai, India',
-                  bg: 'from-purple-600 to-pink-600',
-                },
-                { Icon: FaSquarePhone , title: 'Phone', text: '+91 8595519533 ', bg: 'from-pink-600 to-red-600' },
-                { Icon: TfiEmail , title: 'Email', text: 'contact@crazyfames.com', bg: 'from-blue-600 to-purple-600' },
-              ].map((s, idx) => (
-                <motion.div key={idx} variants={item} whileHover={{ translateX: 6 }} className="flex items-start space-x-4 group">
-                  <motion.div layout whileHover={{ scale: 1.08 }} className={`p-3 bg-gradient-to-r ${s.bg} rounded-xl`}>
-                    <s.Icon className="w-6 h-6 text-white" />
-                  </motion.div>
-                  <div>
-                    <h4 className="text-white font-semibold mb-1">{s.title}</h4>
-                    <p className="text-gray-400 text-sm sm:text-base">{s.text}</p>
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* Left: Contact Info */}
+          <div className="space-y-12">
+            <div>
+              <h3 className="text-2xl sm:text-3xl text-black mb-8 font-serif">
+                Contact Information
+              </h3>
+              <div className="space-y-8">
+                {/* Location */}
+                <div className="flex items-start space-x-5">
+                  <div className="w-12 h-12 bg-black flex items-center justify-center flex-shrink-0">
+                    <FaMapMarkerAlt className="w-5 h-5 text-amber-500" />
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  <div>
+                    <h4 className="text-black font-medium  tracking-wide">
+                      Office Locations
+                    </h4>
 
-            {/* Social buttons */}
-            <motion.div variants={item} className="pt-8">
-              <h4 className="text-white font-semibold mb-4">Follow Us</h4>
-              <div className="flex flex-wrap gap-4">
-                {[FaInstagramSquare , FaFacebook , RiTwitterXFill].map((Icon, idx) => (
-                  <motion.button
+                    <p className="text-gray-600 text-sm">
+                      Dubai, UAE â€¢ Riyadh, Saudi Arabia â€¢ Mumbai{" "}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div className="flex items-start space-x-5">
+                  <div className="w-12 h-12 bg-black flex items-center justify-center flex-shrink-0">
+                    <FaPhone className="w-5 h-5 text-amber-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-black font-medium  tracking-wide">
+                      Phone
+                    </h4>
+                    <p className="text-gray-600 text-sm">+91 8595519533</p>
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="flex items-start space-x-5">
+                  <div className="w-12 h-12 bg-black flex items-center justify-center flex-shrink-0">
+                    <FaEnvelope className="w-5 h-5 text-amber-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-black font-medium  tracking-wide">
+                      Email
+                    </h4>
+                    <p className="text-gray-600 text-sm">
+                      contact@crazyfames.com
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div>
+              <h4 className="text-black font-medium mb-4 tracking-wide">
+                Follow Us
+              </h4>
+              <div className="flex space-x-4">
+                {[
+                  { Icon: FaInstagram, label: "Instagram" },
+                  { Icon: FaFacebookF, label: "Facebook" },
+                  { Icon: FaLinkedinIn, label: "LinkedIn" },
+                ].map(({ Icon, label }, idx) => (
+                  <button
                     key={idx}
-                    whileTap={{ scale: 0.92 }}
-                    whileHover={{ scale: 1.08, rotate: 2 }}
-                    className="p-3 bg-white/5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 rounded-xl transition-all"
-                    aria-label={`Open ${Icon.name}`}
+                    className="w-12 h-12 border-2 border-gray-300 flex items-center justify-center hover:bg-black hover:border-black group transition-colors duration-300"
+                    aria-label={label}
                   >
-                    <Icon className="w-6 h-6 text-gray-400 hover:text-white transition-colors" />
-                  </motion.button>
+                    <Icon className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
+                  </button>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          {/* Right: Form */}
-          <motion.form
-            variants={item}
-            className="flex-1 space-y-6"
-            onSubmit={handleSubmit}
-            aria-label="Contact form"
-          >
-            {[
-              { key: 'name', type: 'text', placeholder: 'Your Name' },
-              { key: 'email', type: 'email', placeholder: 'Your Email' },
-              { key: 'phone', type: 'tel', placeholder: 'Your Phone' },
-            ].map((f) => (
-              <motion.div key={f.key} variants={item} className="relative">
-                <motion.input
-                  type={f.type}
-                  value={formData[f.key]}
-                  onChange={(e) => setFormData({ ...formData, [f.key]: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors"
-                  placeholder={f.placeholder}
-                  whileFocus={{ scale: 1.01 }}
+          {/* Right: Contact Form */}
+          <div className="bg-white p-8 sm:p-12">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className="w-full border-b border-gray-300 py-4 text-black placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
+                  placeholder="Your Name"
+                  required
                 />
-              </motion.div>
-            ))}
+              </div>
 
-            <motion.div variants={item} className="relative">
-              <motion.textarea
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                rows={5}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors resize-none"
-                placeholder="Your Message"
-                whileFocus={{ scale: 1.01 }}
-              />
-            </motion.div>
+              <div>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className="w-full border-b border-gray-300 py-4 text-black placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
+                  placeholder="Your Email"
+                  required
+                />
+              </div>
 
-            <motion.button
-              type="submit"
-              variants={item}
-              whileHover={{ scale: 1.03, boxShadow: '0 10px 30px rgba(139,92,246,0.18)' }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 280, damping: 20 }}
-              className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-semibold text-white   transition-all"
-            >
-              Send Message
-            </motion.button>
-          </motion.form>
-        </motion.div>
-      </motion.div>
-    </motion.section>
+              <div>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
+                  className="w-full border-b border-gray-300 py-4 text-black placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
+                  placeholder="Your Phone"
+                  required
+                />
+              </div>
+
+              <div>
+                <textarea
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  rows={5}
+                  className="w-full border-b border-gray-300 py-4 text-black placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors resize-none bg-transparent"
+                  placeholder="Your Message"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-4 bg-black text-white text-sm tracking-[0.15em] hover:bg-gray-800 transition-colors mt-4"
+              >
+                SEND MESSAGE
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

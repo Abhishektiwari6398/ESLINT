@@ -1,26 +1,16 @@
 import React, { useEffect, useState } from "react";
-import CountUp from "react-countup";
-import { BsCalendarCheckFill, BsStars } from "react-icons/bs";
-
-import {
-  ChevronRight,
-  Star,
-  Users,
-  ArrowUpRight,
-  Sparkles,
-} from "lucide-react";
+import { FaUsers, FaCalendarAlt, FaStar } from "react-icons/fa";
+import { BsArrowRight } from "react-icons/bs";
 
 const ServicesSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [countStarted, setCountStarted] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          setCountStarted(true);
         }
       },
       { threshold: 0.1 }
@@ -36,196 +26,115 @@ const ServicesSection = () => {
 
   const services = [
     {
-      title: "Model Management",
-      description:
-        "Representing elite models and influencers for fashion shows, campaigns, and brand collaborations worldwide.",
-      icon: Users,
-      gradient: "from-purple-600 to-pink-600",
-      stats: 500,
-      feature: "Global Network",
+      title: 'Model Management',
+      description: 'Representing elite models and influencers for fashion shows, campaigns, and brand collaborations worldwide.',
+      image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800',
+      icon: FaUsers,
     },
     {
-      title: "Luxury Events",
-      description:
-        "Producing unforgettable high-end events, galas, and fashion shows in prestigious locations.",
-      icon: BsCalendarCheckFill,
-      gradient: "from-pink-600 to-red-600",
-      stats: 200,
-      feature: "Premium Venues",
+      title: 'Luxury Events',
+      description: 'Producing unforgettable high-end events, galas, and fashion shows in prestigious locations across the Middle East.',
+      image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800',
+      icon: FaCalendarAlt,
     },
     {
-      title: "Celebrity Booking",
-      description:
-        "Connecting brands with A-list celebrities and influencers for endorsements and appearances.",
-      icon: BsStars,
-      gradient: "from-blue-600 to-purple-600",
-      stats: 1000,
-      feature: "A-List Access",
+      title: 'Celebrity Booking',
+      description: 'Connecting brands with A-list celebrities and influencers for endorsements, appearances, and exclusive collaborations.',
+      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800',
+      icon: FaStar,
     },
-  ];
-
-  const stats = [
-    { label: "Active Models", value: 500 },
-    { label: "Events Produced", value: 200 },
-    { label: "Brand Partners", value: 150 },
-    { label: "Countries", value: 25 },
   ];
 
   return (
     <div
       id="services-section"
-      className="min-h-screen bg-black relative overflow-hidden"
+      className="min-h-screen bg-gray-50 py-20 sm:py-32 px-4"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(147,51,234,0.06),transparent_50%)]"></div>
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <div
-          className={`text-center mb-8 sm:mb-12 space-y-4 sm:space-y-6 transition-all duration-1000 ${
+          className={`text-center mb-16 sm:mb-24 space-y-6 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-sm mb-3">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-xs sm:text-sm text-purple-300 font-medium">
-              Services
-            </span>
-          </div>
-
-          <h2 className="text-2xl sm:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight">
-            What we offer?
+          <p className="text-xs tracking-[0.3em] text-gray-500 font-light">SERVICES</p>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl text-black leading-tight font-serif">
+            What We Offer
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
+          <div className="flex items-center justify-center space-x-4">
+            <div className="w-16 h-px bg-amber-500"></div>
+            <div className="w-2 h-2 bg-amber-500 transform rotate-45"></div>
+            <div className="w-16 h-px bg-amber-500"></div>
+          </div>
+          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
             Comprehensive solutions for brands, models, and event organizers
           </p>
         </div>
 
-        {/* Stats Section */}
-        <div
-          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12 transition-all duration-1000 delay-200 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          {stats.map((stat, idx) => {
-            const IconComponent = stat.icon;
-            return (
-              <div key={idx} className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col items-center">
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1">
-                    {countStarted ? (
-                      <CountUp
-                        start={0}
-                        end={stat.value}
-                        duration={2}
-                        suffix="+"
-                        enableScrollSpy={true}
-                        scrollSpyOnce={true}
-                      />
-                    ) : (
-                      0
-                    )}
-                    +
-                  </div>
-                  <div className="text-xs sm:text-sm text-gray-400">
-                    {stat.label}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, idx) => (
             <div
               key={idx}
-              onMouseEnter={() => setHoveredCard(idx)}
-              onMouseLeave={() => setHoveredCard(null)}
-              className={`group relative transition-all duration-700 ${
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className={`group bg-white overflow-hidden transition-all duration-700 hover:shadow-2xl ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: `${idx * 150}ms` }}
             >
-              {/* Glow Effect */}
-              <div
-                className={`absolute -inset-0.5 bg-gradient-to-r ${service.gradient} rounded-3xl  opacity-0 group-hover:opacity-30 transition-all duration-700`}
-              ></div>
-
-              {/* Card */}
-              <div className="relative h-full bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm border border-white/10 rounded-3xl p-5 sm:p-6 hover:border-purple-500/50 transition-all duration-500 flex flex-col">
-                {/* Icon & Stats Badge */}
-                <div className="flex items-start justify-between mb-4 sm:mb-6">
-                  <div
-                    className={`inline-flex p-2 sm:p-3 rounded-2xl bg-gradient-to-r ${service.gradient} group-hover:scale-110 transition-all duration-500`}
-                  >
-                    <service.icon className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
-                  </div>
-                  <div className="px-2 sm:px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs sm:text-xs text-purple-300 font-medium">
-                    {countStarted ? (
-                      <CountUp
-                        start={0}
-                        end={service.stats}
-                        duration={2}
-                        suffix="+"
-                        enableScrollSpy={true}
-                        scrollSpyOnce={true}
-                      />
-                    ) : (
-                      0
-                    )}
-                    +
+              {/* Image */}
+              <div className="relative h-80 overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className={`w-full h-full object-cover transition-all duration-700 ${
+                    hoveredIndex === idx ? 'scale-110 grayscale-0' : 'scale-100 grayscale-[30%]'
+                  }`}
+                />
+                <div className={`absolute inset-0 bg-black transition-opacity duration-500 ${
+                  hoveredIndex === idx ? 'opacity-20' : 'opacity-0'
+                }`}></div>
+                
+                {/* Icon overlay */}
+                <div className="absolute top-6 right-6">
+                  <div className="w-12 h-12 bg-white/90 flex items-center justify-center">
+                    <service.icon className="w-6 h-6 text-black" />
                   </div>
                 </div>
+              </div>
 
-                {/* Content */}
-                <div className="flex-grow">
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-400 leading-relaxed mb-4 sm:mb-6">
-                    {service.description}
-                  </p>
-                </div>
-
-                {/* Feature Tag */}
-                <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-white/10">
-                  <span className="text-xs sm:text-sm text-gray-500 font-medium">
-                    {service.feature}
-                  </span>
-                  <button className="flex items-center gap-2 text-xs sm:text-sm text-purple-400 font-semibold group-hover:text-pink-400 transition-colors duration-300">
-                    <span className="hidden sm:inline">Explore</span>
-                    <ArrowUpRight
-                      className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ${
-                        hoveredCard === idx
-                          ? "translate-x-1 -translate-y-1"
-                          : ""
-                      }`}
-                    />
-                  </button>
-                </div>
+              {/* Content */}
+              <div className="p-8 space-y-4">
+                <h3 className="text-2xl sm:text-3xl text-black font-serif">
+                  {service.title}
+                </h3>
+                <div className="w-12 h-px bg-amber-500"></div>
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                  {service.description}
+                </p>
+                <button className="flex items-center space-x-2 text-sm tracking-wider text-black hover:text-amber-600 transition-colors pt-2 group">
+                  <span>LEARN MORE</span>
+                  <BsArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* CTA Section */}
-        {/* <div
-          className={`mt-8 sm:mt-12 text-center transition-all duration-1000 delay-500 ${
+        {/* Bottom CTA - subtle */}
+        <div
+          className={`text-center mt-16 transition-all duration-1000 delay-500 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
-        > */}
-          {/* <div className="relative inline-block group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur-lg group-hover:blur-xl transition-all duration-500 opacity-70 group-hover:opacity-100"></div>
-            <button className="relative px-4 sm:px-6 py-2.5 sm:py-3 bg-black border border-purple-500/50 rounded-full text-white font-semibold hover:border-purple-400 transition-all duration-300 flex items-center gap-2 mx-auto text-sm sm:text-base">
-              <span>Get Started Today</span>
-              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
-          </div> */}
-        {/* </div> */}
+        >
+          <p className="text-gray-600 mb-6">Ready to elevate your brand?</p>
+          <button className="px-10 py-4 bg-black text-white text-sm tracking-[0.15em] hover:bg-gray-800 transition-colors">
+            GET STARTED
+          </button>
+        </div>
       </div>
     </div>
   );
