@@ -66,7 +66,7 @@ const ContactSection = () => {
                     </h4>
 
                     <p className="text-gray-600 text-sm">
-                      Dubai, UAE â€¢ Riyadh, Saudi Arabia â€¢ Mumbai{" "}
+                      Dubai, UAE Riyadh, Saudi Arabia, Mumbai{" "}
                     </p>
                   </div>
                 </div>
