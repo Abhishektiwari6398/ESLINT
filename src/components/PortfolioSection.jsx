@@ -44,6 +44,59 @@ const PortfolioSection = () => {
 
   return (
     <div id="portfolio-section" className="min-h-screen bg-neutral-50 py-20 sm:py-32 px-4">
+      <style>{`
+        @keyframes float-in {
+          from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        @keyframes tab-slide {
+          from {
+            transform: scaleX(0);
+          }
+          to {
+            transform: scaleX(1);
+          }
+        }
+
+        .image-tilt {
+          transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .image-tilt:hover {
+          transform: perspective(1000px) rotateY(5deg) rotateX(-5deg);
+        }
+
+        .glow-effect {
+          position: relative;
+        }
+
+        .glow-effect::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(245, 158, 11, 0.4) 0%, transparent 70%);
+          transform: translate(-50%, -50%);
+          transition: width 0.6s ease-out, height 0.6s ease-out;
+          pointer-events: none;
+        }
+
+        .glow-effect:hover::after {
+          width: 300px;
+          height: 300px;
+        }
+      `}</style>
+
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className={`text-center mb-16 space-y-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -52,16 +105,28 @@ const PortfolioSection = () => {
             Our Work
           </h2>
           <div className="flex items-center justify-center space-x-4">
-            <div className="w-16 h-px bg-amber-500"></div>
+            <div 
+              className="h-px bg-amber-500"
+              style={{
+                width: isVisible ? '64px' : '0px',
+                transition: 'width 0.8s ease-out 0.3s'
+              }}
+            ></div>
             <div className="w-2 h-2 bg-amber-500 transform rotate-45"></div>
-            <div className="w-16 h-px bg-amber-500"></div>
+            <div 
+              className="h-px bg-amber-500"
+              style={{
+                width: isVisible ? '64px' : '0px',
+                transition: 'width 0.8s ease-out 0.3s'
+              }}
+            ></div>
           </div>
           <p className="text-gray-700 text-base sm:text-lg max-w-2xl mx-auto">
             A glimpse into our world of luxury and excellence
           </p>
         </div>
 
-        {/* Tab Navigation - minimal and elegant */}
+        {/* Tab Navigation */}
         <div className={`flex justify-center mb-16 space-x-12 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
           {['events', 'models'].map((tab) => (
             <button
@@ -75,33 +140,46 @@ const PortfolioSection = () => {
             >
               {tab.toUpperCase()}
               {activeTab === tab && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500"></div>
+                <div 
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500"
+                  style={{
+                    animation: 'tab-slide 0.3s ease-out'
+                  }}
+                ></div>
               )}
             </button>
           ))}
         </div>
 
-        {/* Portfolio Grid - All Equal Size */}
+        {/* Portfolio Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           {portfolioImages[activeTab].map((img, idx) => (
             <div
-              key={idx}
-              className={`group relative aspect-square overflow-hidden cursor-pointer transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-              style={{ transitionDelay: `${idx * 100}ms` }}
+              key={`${activeTab}-${idx}`}
+              className={`group relative aspect-square overflow-hidden cursor-pointer image-tilt glow-effect ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+              style={{ 
+                transitionDelay: `${idx * 100}ms`,
+                animation: isVisible ? `float-in 0.7s ease-out ${idx * 0.1}s both` : 'none'
+              }}
             >
               <img
                 src={img}
                 alt={`Portfolio ${idx + 1}`}
                 className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
               />
-              <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/30 transition-all duration-500 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center space-y-3">
-                  <div className="w-12 h-12 border-2 border-white flex items-center justify-center">
-                    <BsArrowRight className="w-6 h-6 text-white" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/0 to-slate-900/0 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <div className="text-center space-y-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  <div className="w-12 h-12 border-2 border-white flex items-center justify-center mx-auto bg-white/10 backdrop-blur-sm">
+                    <BsArrowRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform duration-300" />
                   </div>
                   <p className="text-white text-sm tracking-wider">VIEW PROJECT</p>
                 </div>
               </div>
+              
+              {/* Corner accent */}
+              <div className="absolute top-0 left-0 w-0 h-0 border-t-2 border-l-2 border-amber-500 group-hover:w-12 group-hover:h-12 transition-all duration-500"></div>
+              <div className="absolute bottom-0 right-0 w-0 h-0 border-b-2 border-r-2 border-amber-500 group-hover:w-12 group-hover:h-12 transition-all duration-500"></div>
             </div>
           ))}
         </div>
@@ -112,8 +190,9 @@ const PortfolioSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <button className="px-10 py-4 border-2 border-slate-900 text-slate-900 text-sm tracking-[0.15em] hover:bg-slate-900 hover:text-white transition-all duration-300">
-            VIEW ALL PROJECTS
+          <button className="group px-10 py-4 border-2 border-slate-900 text-slate-900 text-sm tracking-[0.15em] hover:bg-slate-900 hover:text-white transition-all duration-500 relative overflow-hidden">
+            <span className="relative z-10">VIEW ALL PROJECTS</span>
+            <div className="absolute inset-0 bg-slate-900 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
           </button>
         </div>
       </div>

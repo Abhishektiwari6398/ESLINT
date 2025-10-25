@@ -50,6 +50,67 @@ const ServicesSection = () => {
       id="services-section"
       className="min-h-screen bg-white py-20 sm:py-32 px-4"
     >
+      <style>{`
+        @keyframes ripple {
+          0% {
+            transform: scale(0);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(2);
+            opacity: 0;
+          }
+        }
+
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes iconBounce {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        .hover-lift {
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift:hover {
+          transform: translateY(-10px);
+        }
+
+        .shine-effect {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .shine-effect::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+          transition: left 0.7s;
+        }
+
+        .shine-effect:hover::before {
+          left: 100%;
+        }
+      `}</style>
+
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div
@@ -62,9 +123,21 @@ const ServicesSection = () => {
             What We Offer
           </h2>
           <div className="flex items-center justify-center space-x-4">
-            <div className="w-16 h-px bg-amber-500"></div>
+            <div 
+              className="h-px bg-amber-500"
+              style={{
+                width: isVisible ? '64px' : '0px',
+                transition: 'width 0.8s ease-out 0.3s'
+              }}
+            ></div>
             <div className="w-2 h-2 bg-amber-500 transform rotate-45"></div>
-            <div className="w-16 h-px bg-amber-500"></div>
+            <div 
+              className="h-px bg-amber-500"
+              style={{
+                width: isVisible ? '64px' : '0px',
+                transition: 'width 0.8s ease-out 0.3s'
+              }}
+            ></div>
           </div>
           <p className="text-gray-700 text-base sm:text-lg max-w-2xl mx-auto">
             Comprehensive solutions for brands, models, and event organizers
@@ -78,15 +151,19 @@ const ServicesSection = () => {
               key={idx}
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className={`group bg-white overflow-hidden transition-all duration-700 hover:shadow-2xl ${
+              className={`group bg-white overflow-hidden hover-lift ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
               }`}
-              style={{ transitionDelay: `${idx * 150}ms` }}
+              style={{ 
+                transitionDelay: `${idx * 150}ms`,
+                boxShadow: hoveredIndex === idx ? '0 20px 40px rgba(0,0,0,0.15)' : '0 0 0 rgba(0,0,0,0)',
+                transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
             >
               {/* Image */}
-              <div className="relative h-80 overflow-hidden">
+              <div className="relative h-80 overflow-hidden shine-effect">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -99,9 +176,22 @@ const ServicesSection = () => {
                 }`}></div>
                 
                 {/* Icon overlay */}
-                <div className="absolute top-6 right-6">
-                  <div className="w-12 h-12 bg-white/90 flex items-center justify-center">
+                <div 
+                  className="absolute top-6 right-6 transition-all duration-500"
+                  style={{
+                    transform: hoveredIndex === idx ? 'scale(1.2) rotate(10deg)' : 'scale(1) rotate(0deg)'
+                  }}
+                >
+                  <div className="w-12 h-12 bg-white/90 flex items-center justify-center relative">
                     <service.icon className="w-6 h-6 text-slate-900" />
+                    {hoveredIndex === idx && (
+                      <div 
+                        className="absolute inset-0 border-2 border-amber-500"
+                        style={{
+                          animation: 'ripple 1s ease-out infinite'
+                        }}
+                      ></div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -111,28 +201,40 @@ const ServicesSection = () => {
                 <h3 className="text-2xl sm:text-3xl text-slate-900 font-serif">
                   {service.title}
                 </h3>
-                <div className="w-12 h-px bg-amber-500"></div>
+                <div 
+                  className="h-px bg-amber-500"
+                  style={{
+                    width: hoveredIndex === idx ? '80px' : '48px',
+                    transition: 'width 0.5s ease-out'
+                  }}
+                ></div>
                 <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
                   {service.description}
                 </p>
-                <button className="flex items-center space-x-2 text-sm tracking-wider text-slate-900 hover:text-amber-600 transition-colors pt-2 group">
+                <button className="flex items-center space-x-2 text-sm tracking-wider text-slate-900 hover:text-amber-600 transition-colors pt-2 group/btn">
                   <span>LEARN MORE</span>
-                  <BsArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <BsArrowRight 
+                    className="w-4 h-4 transition-transform duration-300"
+                    style={{
+                      transform: hoveredIndex === idx ? 'translateX(10px)' : 'translateX(0)'
+                    }}
+                  />
                 </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom CTA - subtle */}
+        {/* Bottom CTA */}
         <div
           className={`text-center mt-16 transition-all duration-1000 delay-500 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <p className="text-gray-700 mb-6">Ready to elevate your brand?</p>
-          <button className="px-10 py-4 bg-slate-900 text-white text-sm tracking-[0.15em] hover:bg-slate-800 transition-colors">
-            GET STARTED
+          <button className="group px-10 py-4 bg-slate-900 text-white text-sm tracking-[0.15em] hover:bg-slate-800 transition-all duration-500 relative overflow-hidden">
+            <span className="relative z-10">GET STARTED</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
           </button>
         </div>
       </div>
