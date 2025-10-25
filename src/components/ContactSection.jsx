@@ -1,290 +1,137 @@
-import React, { useState } from "react";
-import {
-  FaPhone,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaInstagram,
-  FaFacebookF,
-  FaLinkedinIn,
-} from "react-icons/fa";
-
-const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  const [focusedField, setFocusedField] = useState(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you for your inquiry! We will contact you soon.");
-    setFormData({ name: "", email: "", phone: "", message: "" });
-  };
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
+import { Menu, X, Sparkles, Phone, Mail, MapPin, Instagram, Facebook, Linkedin, ArrowRight, Star, Calendar, Users, Award, Globe } from 'lucide-react';
+const AnimatedSection = ({ children, id }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <div
-      id="contact-section"
-      className="min-h-screen bg-white py-20 sm:py-32 px-4"
+    <motion.div
+      ref={ref}
+      id={id}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <style>{`
-        @keyframes pulse-ring {
-          0% {
-            transform: scale(0.95);
-            opacity: 1;
-          }
-          50% {
-            transform: scale(1);
-            opacity: 0.7;
-          }
-          100% {
-            transform: scale(0.95);
-            opacity: 1;
-          }
-        }
+      {children}
+    </motion.div>
+  );
+};
+const ContactSection = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
 
-        @keyframes slide-in-left {
-          from {
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes slide-in-right {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        .contact-item {
-          animation: slide-in-left 0.6s ease-out both;
-        }
-
-        .form-container {
-          animation: slide-in-right 0.6s ease-out both;
-        }
-
-        .icon-pulse {
-          animation: pulse-ring 2s ease-in-out infinite;
-        }
-
-        .input-focus-line {
-          position: relative;
-        }
-
-        .input-focus-line::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          width: 0;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, #f59e0b, transparent);
-          transform: translateX(-50%);
-          transition: width 0.5s ease-out;
-        }
-
-        .input-focus-line.focused::after {
-          width: 100%;
-        }
-      `}</style>
-
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16 sm:mb-24 space-y-6">
-          <p className="text-xs tracking-[0.3em] text-gray-500 font-light">
-            CONTACT
-          </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl text-slate-900 leading-tight font-serif">
-            Get In Touch
-          </h2>
-          <div className="flex items-center justify-center space-x-4">
-            <div className="w-16 h-px bg-amber-500"></div>
-            <div className="w-2 h-2 bg-amber-500 transform rotate-45"></div>
-            <div className="w-16 h-px bg-amber-500"></div>
-          </div>
-          <p className="text-gray-700 text-base sm:text-lg max-w-2xl mx-auto">
-            Let's create something extraordinary together
-          </p>
-        </div>
-
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Left: Contact Info */}
-          <div className="space-y-12">
-            <div>
-              <h3 className="text-2xl sm:text-3xl text-slate-900 mb-8 font-serif">
-                Contact Information
-              </h3>
-              <div className="space-y-8">
-                {/* Location */}
-                <div 
-                  className="flex items-start space-x-5 contact-item group"
-                  style={{ animationDelay: '0.1s' }}
-                >
-                  <div className="w-12 h-12 bg-slate-900 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 icon-pulse">
-                    <FaMapMarkerAlt className="w-5 h-5 text-amber-500" />
-                  </div>
-                  <div>
-                    <h4 className="text-slate-900 font-medium tracking-wide">
-                      Office Locations
-                    </h4>
-                    <p className="text-gray-700 text-sm">
-                      Dubai, UAE • Riyadh, Saudi Arabia • Mumbai
-                    </p>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div 
-                  className="flex items-start space-x-5 contact-item group"
-                  style={{ animationDelay: '0.2s' }}
-                >
-                  <div className="w-12 h-12 bg-slate-900 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
-                    <FaPhone className="w-5 h-5 text-amber-500" />
-                  </div>
-                  <div>
-                    <h4 className="text-slate-900 font-medium tracking-wide">
-                      Phone
-                    </h4>
-                    <p className="text-gray-700 text-sm">+91 8595519533</p>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div 
-                  className="flex items-start space-x-5 contact-item group"
-                  style={{ animationDelay: '0.3s' }}
-                >
-                  <div className="w-12 h-12 bg-slate-900 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <FaEnvelope className="w-5 h-5 text-amber-500" />
-                  </div>
-                  <div>
-                    <h4 className="text-slate-900 font-medium tracking-wide">
-                      Email
-                    </h4>
-                    <p className="text-gray-700 text-sm">
-                      contact@crazyfames.com
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div 
-              className="contact-item"
-              style={{ animationDelay: '0.4s' }}
+  return (
+    <AnimatedSection id="contact">
+      <div className="min-h-screen bg-white py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-20 space-y-6"
+          >
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-5xl md:text-6xl font-playfair text-slate-900"
             >
-              <h4 className="text-slate-900 font-medium mb-4 tracking-wide">
-                Follow Us
-              </h4>
-              <div className="flex space-x-4">
-                {[
-                  { Icon: FaInstagram, label: "Instagram" },
-                  { Icon: FaFacebookF, label: "Facebook" },
-                  { Icon: FaLinkedinIn, label: "LinkedIn" },
-                ].map(({ Icon, label }, idx) => (
-                  <button
-                    key={idx}
-                    className="w-12 h-12 border-2 border-gray-300 flex items-center justify-center hover:bg-slate-900 hover:border-slate-900 group transition-all duration-500 hover:rotate-12 hover:scale-110"
-                    aria-label={label}
-                    style={{
-                      transitionDelay: `${idx * 50}ms`
-                    }}
+              Get In Touch
+            </motion.h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              {[
+                { icon: MapPin, title: 'Office Locations', text: 'Dubai, UAE • Riyadh, Saudi Arabia • Mumbai' },
+                { icon: Phone, title: 'Phone', text: '+91 8595519533' },
+                { icon: Mail, title: 'Email', text: 'contact@crazyfames.com' },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  whileHover={{ x: 10 }}
+                  className="flex items-start space-x-5 group"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 10 }}
+                    className="w-12 h-12 bg-slate-900 flex items-center justify-center"
                   >
-                    <Icon className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
-                  </button>
+                    <item.icon className="w-5 h-5 text-amber-500" />
+                  </motion.div>
+                  <div>
+                    <h4 className="text-slate-900 font-medium mb-1">{item.title}</h4>
+                    <p className="text-gray-700 text-sm">{item.text}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-neutral-50 p-10"
+            >
+              <form className="space-y-6">
+                {['name', 'email', 'phone'].map((field) => (
+                  <motion.div
+                    key={field}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    whileFocus={{ scale: 1.02 }}
+                  >
+                    <input
+                      type={field === 'email' ? 'email' : field === 'phone' ? 'tel' : 'text'}
+                      value={formData[field]}
+                      onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                      placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                      className="w-full border-b-2 border-gray-300 py-4 text-slate-900 bg-transparent focus:border-amber-500 focus:outline-none transition-colors"
+                      required
+                    />
+                  </motion.div>
                 ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Contact Form */}
-          <div className="bg-neutral-50 p-8 sm:p-12 form-container">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className={`input-focus-line ${focusedField === 'name' ? 'focused' : ''}`}>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onFocus={() => setFocusedField('name')}
-                  onBlur={() => setFocusedField(null)}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className="w-full border-b border-gray-300 py-4 text-slate-900 placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
-                  placeholder="Your Name"
-                  required
-                />
-              </div>
-
-              <div className={`input-focus-line ${focusedField === 'email' ? 'focused' : ''}`}>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onFocus={() => setFocusedField('email')}
-                  onBlur={() => setFocusedField(null)}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full border-b border-gray-300 py-4 text-slate-900 placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
-                  placeholder="Your Email"
-                  required
-                />
-              </div>
-
-              <div className={`input-focus-line ${focusedField === 'phone' ? 'focused' : ''}`}>
-                <input
-                  type="tel"
-                  value={formData.phone}
-                  onFocus={() => setFocusedField('phone')}
-                  onBlur={() => setFocusedField(null)}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  className="w-full border-b border-gray-300 py-4 text-slate-900 placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors bg-transparent"
-                  placeholder="Your Phone"
-                  required
-                />
-              </div>
-
-              <div className={`input-focus-line ${focusedField === 'message' ? 'focused' : ''}`}>
-                <textarea
-                  value={formData.message}
-                  onFocus={() => setFocusedField('message')}
-                  onBlur={() => setFocusedField(null)}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  rows={5}
-                  className="w-full border-b border-gray-300 py-4 text-slate-900 placeholder-gray-400 focus:border-amber-500 focus:outline-none transition-colors resize-none bg-transparent"
-                  placeholder="Your Message"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="group w-full py-4 bg-slate-900 text-white text-sm tracking-[0.15em] hover:bg-slate-800 transition-all duration-500 mt-4 relative overflow-hidden"
-              >
-                <span className="relative z-10">SEND MESSAGE</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-400 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
-              </button>
-            </form>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <textarea
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    placeholder="Your Message"
+                    rows={5}
+                    className="w-full border-b-2 border-gray-300 py-4 text-slate-900 bg-transparent focus:border-amber-500 focus:outline-none transition-colors resize-none"
+                    required
+                  />
+                </motion.div>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-4 bg-slate-900 text-white text-sm tracking-[0.15em] hover:bg-slate-800 transition-all relative overflow-hidden group"
+                >
+                  <span className="relative z-10">SEND MESSAGE</span>
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-500"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.button>
+              </form>
+            </motion.div>
           </div>
         </div>
       </div>
-    </div>
+    </AnimatedSection>
   );
 };
-
 export default ContactSection;
