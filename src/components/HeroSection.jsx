@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
-import { Menu, X, Sparkles, Phone, Mail, MapPin, Instagram, Facebook, Linkedin, ArrowRight, Star, Calendar, Users, Award, Globe } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {  ArrowRight } from 'lucide-react';
 
 
 const HeroSection = () => {
@@ -23,16 +23,34 @@ const HeroSection = () => {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 1.2, rotate: 5 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          exit={{ opacity: 0, scale: 0.8, rotate: -5 }}
           transition={{ duration: 1.5 }}
           className="absolute inset-0"
         >
           <img src={slides[currentSlide]} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-transparent to-slate-900/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-transparent to-slate-900/80" />
         </motion.div>
       </AnimatePresence>
+
+  
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-2 h-2 bg-amber-400 rounded-full"
+          initial={{ x: Math.random() * window.innerWidth, y: -20, opacity: 0 }}
+          animate={{
+            y: window.innerHeight + 20,
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: Math.random() * 3 + 2,
+            repeat: Infinity,
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
 
       <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
         <div className="max-w-5xl">
@@ -42,7 +60,12 @@ const HeroSection = () => {
             transition={{ delay: 0.3 }}
             className="text-xs tracking-[0.3em] text-white/80 mb-6 font-light"
           >
-            DUBAI • RIYADH • MUMBAI
+            <motion.span
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              DUBAI • RIYADH • MUMBAI
+            </motion.span>
           </motion.p>
 
           <div className="overflow-hidden mb-6">
@@ -50,15 +73,26 @@ const HeroSection = () => {
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-6xl md:text-8xl font-playfair text-white leading-tight"
+              className="text-6xl md:text-8xl font-serif text-white leading-tight"
             >
-              Elegance
+              <motion.span
+                animate={{ 
+                  textShadow: [
+                    "0 0 20px rgba(251, 191, 36, 0.5)",
+                    "0 0 40px rgba(251, 191, 36, 0.8)",
+                    "0 0 20px rgba(251, 191, 36, 0.5)"
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                Elegance
+              </motion.span>
             </motion.h1>
             <motion.h1
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-6xl md:text-8xl font-playfair text-white leading-tight"
+              className="text-6xl md:text-8xl font-serif text-white leading-tight"
             >
               Redefined
             </motion.h1>
@@ -70,13 +104,21 @@ const HeroSection = () => {
             transition={{ duration: 1, delay: 0.9 }}
             className="flex items-center justify-center space-x-4 mb-8"
           >
-            <div className="h-px bg-amber-400 w-16" />
+            <motion.div 
+              className="h-px bg-amber-400 w-16"
+              animate={{ scaleX: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               className="w-2 h-2 bg-amber-400 rotate-45"
             />
-            <div className="h-px bg-amber-400 w-16" />
+            <motion.div 
+              className="h-px bg-amber-400 w-16"
+              animate={{ scaleX: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
           </motion.div>
 
           <motion.p
@@ -95,17 +137,23 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.4)" }}
-              whileTap={{ scale: 0.95 }}
-              className="px-10 py-4 bg-white text-black text-sm tracking-[0.15em] font-medium flex items-center justify-center space-x-2 group"
-            >
-              <span>VIEW PORTFOLIO</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-            </motion.button>
-            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-10 py-4 border-2 border-white text-white text-sm tracking-[0.15em] font-medium hover:bg-white hover:text-black transition-all"
+              className="px-10 py-4 bg-white text-black text-sm tracking-[0.15em] font-medium flex items-center justify-center space-x-2 group relative overflow-hidden"
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+              <span className="relative z-10">VIEW PORTFOLIO</span>
+              <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-2 transition-transform" />
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05, backgroundColor: "white", color: "black" }}
+              whileTap={{ scale: 0.95 }}
+              className="px-10 py-4 border-2 border-white text-white text-sm tracking-[0.15em] font-medium transition-all"
             >
               CONTACT US
             </motion.button>
@@ -117,7 +165,7 @@ const HeroSection = () => {
         {slides.map((_, idx) => (
           <motion.button
             key={idx}
-            whileHover={{ scale: 1.2 }}
+            whileHover={{ scale: 1.5, backgroundColor: "#fbbf24" }}
             onClick={() => setCurrentSlide(idx)}
             className={`transition-all ${
               idx === currentSlide ? 'bg-white w-12 h-0.5' : 'bg-white/40 w-2 h-0.5'

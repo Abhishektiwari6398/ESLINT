@@ -1,27 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { BsArrowRight } from 'react-icons/bs';
+import { AnimatePresence, motion,useInView } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import React, {  useState } from 'react';
+
+
 
 const PortfolioSection = () => {
   const [activeTab, setActiveTab] = useState('events');
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById('portfolio-section');
-    if (element) observer.observe(element);
-
-    return () => {
-      if (element) observer.unobserve(element);
-    };
-  }, []);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   const portfolioImages = {
     events: [
@@ -43,158 +30,223 @@ const PortfolioSection = () => {
   };
 
   return (
-    <div id="portfolio-section" className="min-h-screen bg-neutral-50 py-20 sm:py-32 px-4">
-      <style>{`
-        @keyframes float-in {
-          from {
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
+    <div ref={ref} id="portfolio" className="min-h-screen bg-gradient-to-b from-neutral-50 to-white py-20 sm:py-32 px-4 relative overflow-hidden">
+      {/* Animated background */}
+      <motion.div
+        className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-20"
+        animate={{ 
+          scale: [1, 1.5, 1],
+          x: [0, 100, 0]
+        }}
+        transition={{ duration: 12, repeat: Infinity }}
+      />
 
-        @keyframes tab-slide {
-          from {
-            transform: scaleX(0);
-          }
-          to {
-            transform: scaleX(1);
-          }
-        }
-
-        .image-tilt {
-          transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .image-tilt:hover {
-          transform: perspective(1000px) rotateY(5deg) rotateX(-5deg);
-        }
-
-        .glow-effect {
-          position: relative;
-        }
-
-        .glow-effect::after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 0;
-          height: 0;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(245, 158, 11, 0.4) 0%, transparent 70%);
-          transform: translate(-50%, -50%);
-          transition: width 0.6s ease-out, height 0.6s ease-out;
-          pointer-events: none;
-        }
-
-        .glow-effect:hover::after {
-          width: 300px;
-          height: 300px;
-        }
-      `}</style>
-
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className={`text-center mb-16 space-y-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <p className="text-xs tracking-[0.3em] text-gray-500 font-light">PORTFOLIO</p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl text-slate-900 leading-tight font-serif">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16 space-y-6"
+        >
+          <motion.p 
+            className="text-xs tracking-[0.3em] text-gray-500 font-light"
+            animate={{ letterSpacing: isInView ? '0.3em' : '0.1em' }}
+          >
+            PORTFOLIO
+          </motion.p>
+          <motion.h2 
+            className="text-4xl sm:text-5xl md:text-6xl text-slate-900 leading-tight font-serif"
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+          >
             Our Work
-          </h2>
+          </motion.h2>
           <div className="flex items-center justify-center space-x-4">
-            <div 
+            <motion.div 
               className="h-px bg-amber-500"
-              style={{
-                width: isVisible ? '64px' : '0px',
-                transition: 'width 0.8s ease-out 0.3s'
+              initial={{ width: 0 }}
+              animate={isInView ? { width: 64 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+            <motion.div 
+              className="w-2 h-2 bg-amber-500 transform rotate-45"
+              animate={{ 
+                rotate: [45, 405, 45],
+                scale: [1, 1.3, 1]
               }}
-            ></div>
-            <div className="w-2 h-2 bg-amber-500 transform rotate-45"></div>
-            <div 
+              transition={{ duration: 3, repeat: Infinity }}
+            />
+            <motion.div 
               className="h-px bg-amber-500"
-              style={{
-                width: isVisible ? '64px' : '0px',
-                transition: 'width 0.8s ease-out 0.3s'
-              }}
-            ></div>
+              initial={{ width: 0 }}
+              animate={isInView ? { width: 64 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
           </div>
-          <p className="text-gray-700 text-base sm:text-lg max-w-2xl mx-auto">
-            A glimpse into our world of luxury and excellence
-          </p>
-        </div>
+        </motion.div>
 
-        {/* Tab Navigation */}
-        <div className={`flex justify-center mb-16 space-x-12 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
+        {/* Tab Navigation with enhanced animation */}
+        <div className="flex justify-center mb-16 space-x-12">
           {['events', 'models'].map((tab) => (
-            <button
+            <motion.button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`relative text-sm tracking-[0.2em] pb-3 transition-all duration-300 ${
-                activeTab === tab
-                  ? 'text-slate-900'
-                  : 'text-gray-400 hover:text-gray-600'
+                activeTab === tab ? 'text-slate-900' : 'text-gray-400 hover:text-gray-600'
               }`}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
               {tab.toUpperCase()}
               {activeTab === tab && (
-                <div 
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500"
-                  style={{
-                    animation: 'tab-slide 0.3s ease-out'
-                  }}
-                ></div>
+                <motion.div 
+                  layoutId="activeTab"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
               )}
-            </button>
+            </motion.button>
           ))}
         </div>
 
-        {/* Portfolio Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-          {portfolioImages[activeTab].map((img, idx) => (
-            <div
-              key={`${activeTab}-${idx}`}
-              className={`group relative aspect-square overflow-hidden cursor-pointer image-tilt glow-effect ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-              style={{ 
-                transitionDelay: `${idx * 100}ms`,
-                animation: isVisible ? `float-in 0.7s ease-out ${idx * 0.1}s both` : 'none'
-              }}
-            >
-              <img
-                src={img}
-                alt={`Portfolio ${idx + 1}`}
-                className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/0 to-slate-900/0 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-                <div className="text-center space-y-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <div className="w-12 h-12 border-2 border-white flex items-center justify-center mx-auto bg-white/10 backdrop-blur-sm">
-                    <BsArrowRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform duration-300" />
+        {/* Portfolio Grid with dramatic entrance */}
+        <motion.div 
+          className="grid grid-cols-2 md:grid-cols-3 gap-6"
+          layout
+        >
+          <AnimatePresence mode="wait">
+            {portfolioImages[activeTab].map((img, idx) => (
+              <motion.div
+                key={`${activeTab}-${idx}`}
+                layout
+                initial={{ opacity: 0, scale: 0.5, rotateY: -90 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  rotateY: 0,
+                  transition: {
+                    delay: idx * 0.1,
+                    duration: 0.6,
+                    type: "spring",
+                    stiffness: 100
+                  }
+                }}
+                exit={{ opacity: 0, scale: 0.5, rotateY: 90 }}
+                onMouseEnter={() => setHoveredIndex(idx)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className="group relative aspect-square overflow-hidden cursor-pointer rounded-lg"
+                whileHover={{ 
+                  scale: 1.05, 
+                  zIndex: 10,
+                  rotateZ: hoveredIndex === idx ? 2 : 0
+                }}
+              >
+                <motion.img
+                  src={img}
+                  alt={`Portfolio ${idx + 1}`}
+                  className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 transition-all duration-700"
+                  animate={{ scale: hoveredIndex === idx ? 1.15 : 1 }}
+                  transition={{ duration: 0.6 }}
+                />
+                
+                {/* Overlay gradient */}
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: hoveredIndex === idx ? 1 : 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+
+                {/* Content */}
+                <motion.div 
+                  className="absolute inset-0 flex items-center justify-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: hoveredIndex === idx ? 1 : 0,
+                    y: hoveredIndex === idx ? 0 : 20
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="text-center space-y-3">
+                    <motion.div 
+                      className="w-12 h-12 border-2 border-white flex items-center justify-center mx-auto bg-white/10 backdrop-blur-sm rounded-full"
+                      whileHover={{ scale: 1.2, rotate: 90 }}
+                    >
+                      <ArrowRight className="w-6 h-6 text-white" />
+                    </motion.div>
+                    <p className="text-white text-sm tracking-wider">VIEW PROJECT</p>
                   </div>
-                  <p className="text-white text-sm tracking-wider">VIEW PROJECT</p>
-                </div>
-              </div>
-              
-              {/* Corner accent */}
-              <div className="absolute top-0 left-0 w-0 h-0 border-t-2 border-l-2 border-amber-500 group-hover:w-12 group-hover:h-12 transition-all duration-500"></div>
-              <div className="absolute bottom-0 right-0 w-0 h-0 border-b-2 border-r-2 border-amber-500 group-hover:w-12 group-hover:h-12 transition-all duration-500"></div>
-            </div>
-          ))}
-        </div>
+                </motion.div>
+                
+                {/* Animated corner accents */}
+                <motion.div 
+                  className="absolute top-0 left-0 w-0 h-0 border-t-2 border-l-2 border-amber-500"
+                  animate={{ 
+                    width: hoveredIndex === idx ? 40 : 0,
+                    height: hoveredIndex === idx ? 40 : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.div 
+                  className="absolute bottom-0 right-0 w-0 h-0 border-b-2 border-r-2 border-amber-500"
+                  animate={{ 
+                    width: hoveredIndex === idx ? 40 : 0,
+                    height: hoveredIndex === idx ? 40 : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+
+                {/* Glowing effect */}
+                {hoveredIndex === idx && (
+                  <motion.div
+                    className="absolute inset-0 pointer-events-none"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                  >
+                    <motion.div
+                      className="absolute top-1/2 left-1/2 w-32 h-32 bg-amber-400 rounded-full blur-3xl"
+                      animate={{ 
+                        scale: [1, 1.5, 1],
+                        opacity: [0.3, 0.5, 0.3]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      style={{ transform: 'translate(-50%, -50%)' }}
+                    />
+                  </motion.div>
+                )}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {/* View More CTA */}
-        <div
-          className={`text-center mt-16 transition-all duration-1000 delay-500 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 1, duration: 0.6 }}
+          className="text-center mt-16"
         >
-          <button className="group px-10 py-4 border-2 border-slate-900 text-slate-900 text-sm tracking-[0.15em] hover:bg-slate-900 hover:text-white transition-all duration-500 relative overflow-hidden">
-            <span className="relative z-10">VIEW ALL PROJECTS</span>
-            <div className="absolute inset-0 bg-slate-900 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-          </button>
-        </div>
+          <motion.button 
+            className="group relative px-10 py-4 border-2 border-slate-900 text-slate-900 text-sm tracking-[0.15em] overflow-hidden rounded-sm"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <motion.span className="relative z-10">VIEW ALL PROJECTS</motion.span>
+            <motion.div 
+              className="absolute inset-0 bg-slate-900"
+              initial={{ y: '100%' }}
+              whileHover={{ y: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.span 
+              className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-10 transition-opacity z-20"
+            >
+              VIEW ALL PROJECTS
+            </motion.span>
+          </motion.button>
+        </motion.div>
       </div>
     </div>
   );
