@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
-import { Sparkles } from 'lucide-react'; // install lucide-react or replace with your preferred icon
+import { Sparkles } from 'lucide-react'; 
 
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -11,7 +11,7 @@ import PortfolioSection from './components/PortfolioSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/FooterSection';
 
-/* Page transition variants */
+
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
   animate: {
@@ -145,7 +145,7 @@ const AppContent = () => {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          {/* Optional: 404 route */}
+         
           <Route path="*" element={<HomePage />} />
         </Routes>
       </AnimatePresence>
@@ -154,7 +154,7 @@ const AppContent = () => {
   );
 };
 
-/* Root App — Router wraps everything */
+
 const App = () => (
   <Router>
     <div className="bg-white text-slate-900 min-h-screen overflow-x-hidden font-sans">
