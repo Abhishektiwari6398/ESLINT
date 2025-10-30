@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
@@ -9,7 +8,6 @@ import ServicesSection from './components/ServicesSection';
 import PortfolioSection from './components/PortfolioSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/FooterSection';
-import { Sparkles } from 'lucide-react';
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -81,9 +79,9 @@ const ScrollToTop = () => {
   return null;
 };
 
-const ProgressBar = ({ restDelta = 0.001 }) => {
+const ProgressBar = () => {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
   return (
     <motion.div
       style={{ scaleX }}
@@ -92,12 +90,27 @@ const ProgressBar = ({ restDelta = 0.001 }) => {
   );
 };
 
-
+// Loader component
+const Loader = () => (
+  <div className="fixed inset-0 flex items-center justify-center bg-white z-[200]">
+    <motion.div
+      className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full"
+      animate={{ rotate: 360 }}
+      transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+    />
+  </div>
+);
 
 const AppContent = () => {
   const location = useLocation();
- 
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1200); // Show loader for 1.2s
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <Loader />;
 
   return (
     <>
@@ -118,58 +131,15 @@ const AppContent = () => {
   );
 };
 
+const App = () => (
+  
 
-
-const App = () => {
-  const [loading, setLoading] = useState(true);
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-white z-[200]">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1, rotate: 360 }}
-          transition={{ duration: 1 }}
-          className="relative"
-        >
-          <motion.div
-            className="w-20 h-20 border-4 border-amber-500 border-t-transparent rounded-full"
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-          />
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-          >
-            <Sparkles className="w-8 h-8 text-amber-500" />
-          </motion.div>
-        </motion.div>
-      </div>
-    );
-  }
-
-  return (
-    <Router>
-      <div className="bg-white text-slate-900 min-h-screen overflow-x-hidden">
+  <Router>
     
-        <motion.div
-          style={{ scaleX }}
-          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-amber-600 to-amber-500 origin-left z-[100]"
-        />
-
-        
-        <AppContent />
-      </div>
-    </Router>
-  );
-};
+    <div className="bg-white text-slate-900 min-h-screen overflow-x-hidden font-sans">
+      <AppContent />
+    </div>
+  </Router>
+);
 
 export default App;
