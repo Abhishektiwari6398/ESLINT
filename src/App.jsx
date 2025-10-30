@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
@@ -80,9 +81,9 @@ const ScrollToTop = () => {
   return null;
 };
 
-const ProgressBar = () => {
+const ProgressBar = ({ restDelta = 0.001 }) => {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta });
   return (
     <motion.div
       style={{ scaleX }}
@@ -91,27 +92,12 @@ const ProgressBar = () => {
   );
 };
 
-// Loader component
-const Loader = () => (
-  <div className="fixed inset-0 flex items-center justify-center bg-white z-[200]">
-    <motion.div
-      className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full"
-      animate={{ rotate: 360 }}
-      transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-    />
-  </div>
-);
+
 
 const AppContent = () => {
   const location = useLocation();
-  const [loading, setLoading] = useState(true);
+ 
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1200); // Show loader for 1.2s
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) return <Loader />;
 
   return (
     <>
@@ -132,10 +118,12 @@ const AppContent = () => {
   );
 };
 
+
+
 const App = () => {
   const [loading, setLoading] = useState(true);
-  // const { scrollYProgress } = useScroll();
-  // const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
@@ -169,23 +157,19 @@ const App = () => {
   }
 
   return (
-    <div className="bg-white text-slate-900 min-h-screen overflow-x-hidden">
-      <motion.div
-        // style={{ scaleX }}
-        // className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-amber-600 to-amber-500 origin-left z-[100]"
-      />
+    <Router>
+      <div className="bg-white text-slate-900 min-h-screen overflow-x-hidden">
+    
+        <motion.div
+          style={{ scaleX }}
+          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-amber-600 to-amber-500 origin-left z-[100]"
+        />
 
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <PortfolioSection />
-      <ContactSection />
-      <Footer />
-    </div>
+        
+        <AppContent />
+      </div>
+    </Router>
   );
 };
 
 export default App;
-
-
