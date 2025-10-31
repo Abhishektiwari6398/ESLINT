@@ -45,8 +45,8 @@ const ServicesSection = () => {
 
   return (
     <AnimatedSection id="services">
-      <div className="min-h-screen bg-gradient-to-b from-white to-neutral-50 py-20 px-4 relative overflow-hidden">
-        {/* Animated background shapes */}
+      <div className=" bg-gradient-to-b from-white to-neutral-50 py-12 md:py-16 px-4 relative overflow-hidden">
+       
         <motion.div
           className="absolute top-20 right-0 w-96 h-96 bg-purple-200 rounded-full blur-3xl opacity-20"
           animate={{ 

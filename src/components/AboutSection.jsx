@@ -46,7 +46,7 @@ const AboutSection = () => {
 
   return (
     <AnimatedSection id="about">
-      <div ref={ref} className="min-h-screen bg-gradient-to-b from-neutral-50 to-white py-20 px-4 relative overflow-hidden">
+      <div ref={ref} className=" bg-gradient-to-b from-neutral-50 to-white py-12 md:py-16 px-4 relative overflow-hidden">
         {/* Background decoration */}
         <motion.div
           className="absolute top-0 left-0 w-96 h-96 bg-amber-200 rounded-full blur-3xl opacity-20"

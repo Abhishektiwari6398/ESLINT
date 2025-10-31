@@ -44,7 +44,7 @@ const ContactSection = () => {
 
   return (
     <AnimatedSection id="contact">
-      <div className="min-h-screen bg-gradient-to-b from-white to-neutral-50 py-20 px-4 relative overflow-hidden">
+      <div className=" bg-gradient-to-b from-white to-neutral-50 py-12 md:py-16 px-4 relative overflow-hidden">
       
        
 

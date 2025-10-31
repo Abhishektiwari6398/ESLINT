@@ -42,7 +42,7 @@ const HomePage = () => (
 
 const AboutPage = () => (
   <AnimatedPage>
-    <div className="pt-20">
+    <div className="pt-6 md:pt-12">
       <AboutSection />
     </div>
   </AnimatedPage>
@@ -50,7 +50,7 @@ const AboutPage = () => (
 
 const ServicesPage = () => (
   <AnimatedPage>
-    <div className="pt-20">
+    <div className="pt-6 md:pt-12">
       <ServicesSection />
     </div>
   </AnimatedPage>
@@ -58,7 +58,7 @@ const ServicesPage = () => (
 
 const PortfolioPage = () => (
   <AnimatedPage>
-    <div className="pt-20">
+    <div className="pt-6 md:pt-12">
       <PortfolioSection />
     </div>
   </AnimatedPage>
@@ -66,7 +66,7 @@ const PortfolioPage = () => (
 
 const ContactPage = () => (
   <AnimatedPage>
-    <div className="pt-20">
+    <div className="pt-6 md:pt-12">
       <ContactSection />
     </div>
   </AnimatedPage>

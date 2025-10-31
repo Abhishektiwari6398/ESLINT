@@ -30,7 +30,7 @@ const PortfolioSection = () => {
   };
 
   return (
-    <div ref={ref} id="portfolio" className="min-h-screen bg-gradient-to-b from-neutral-50 to-white py-20 sm:py-32 px-4 relative overflow-hidden">
+    <div ref={ref} id="portfolio" className=" bg-gradient-to-b from-neutral-50 to-white py-12 md:py-16 px-4 relative overflow-hidden">
       {/* Animated background */}
       <motion.div
         className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-20"
